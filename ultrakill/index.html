@@ -100,6 +100,45 @@
             });
         });
     </script>
+    <script>
+        document.addEventListener("keydown", function (event) {
+            // Check if the Ctrl key (or Command key on Mac) is pressed
+            if (event.ctrlKey || event.metaKey) {
+                switch (event.key) {
+                    case 'c': // Disable Ctrl+C
+                    case 'C':
+                    case 'v': // Disable Ctrl+V
+                    case 'V':
+                    case 'u': // Disable Ctrl+U
+                    case 'U':
+                    case 'w': // Disable Ctrl+W
+                    case 'W':
+                    case 'd': // Disable Ctrl+D
+                    case 'D':
+                    case 's': // Disable Ctrl+S
+                    case 'S':
+                    case 'a': // Disable Ctrl+A
+                    case 'A':
+                    case 'e': // Disable Ctrl+E
+                    case 'E':
+                    case 'q': // Disable Ctrl+Q
+                    case 'Q':
+                    case 'r': // Disable Ctrl+R
+                    case 'R':
+                    case 't': // Disable Ctrl+R
+                    case 'T':
+                        event.preventDefault();
+                        event.stopPropagation();
+                        break;
+                }
+            }
+            // Disable F12
+            if (event.key === "F12") {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+        }, true); // Use capture phase to ensure it runs before other handlers
+    </script>
 </body>
 
 </html>
