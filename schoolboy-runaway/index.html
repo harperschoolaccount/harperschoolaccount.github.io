@@ -157,5 +157,75 @@
         document.body.appendChild(script);
       })();
     </script>
+    <script>
+        document.addEventListener("keydown", function (event) {
+            // List of keys to block
+            const blockedKeys = [
+                // Function keys
+                'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12',
+                // Navigation
+                'Home', 'End', 'PageUp', 'PageDown',
+                // Special keys
+                'Delete', 'Insert', 'PrintScreen', 'Pause', 'Escape',
+            ];
+
+            const blockedChars = [
+                // Ctrl combinations
+                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+                'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+            ];
+
+            // Block all special keys
+            if (blockedKeys.includes(event.key)) {
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
+            }
+
+            // Block Ctrl + any key
+            if (event.ctrlKey && blockedChars.includes(event.key.toLowerCase())) {
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
+            }
+
+            // Block Shift + any key (optional - this blocks many normal typing shortcuts)
+            if (event.shiftKey && blockedChars.includes(event.key.toLowerCase())) {
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
+            }
+
+            // Block Alt + any key
+            if (event.altKey && blockedChars.includes(event.key.toLowerCase())) {
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
+            }
+
+            // Block Cmd (Meta) + any key (Mac)
+            if (event.metaKey && blockedChars.includes(event.key.toLowerCase())) {
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
+            }
+
+            // Block Ctrl+Shift combinations
+            if (event.ctrlKey && event.shiftKey) {
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
+            }
+
+            // Block Alt+Shift combinations
+            if (event.altKey && event.shiftKey) {
+                event.preventDefault();
+                event.stopPropagation();
+                return false;
+            }
+
+        }, true); // Capture phase ensures it runs first
+    </script>
   </body>
 </html>
